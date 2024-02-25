@@ -2,9 +2,7 @@
 //
 
 #include <iostream>
-#include <chrono>
 using namespace std;
-using namespace std::chrono;
 void nextSchueler(int counter);
 
 
@@ -76,12 +74,13 @@ int schueler[64][2] =
     { 19,26 } };
 int aktAuswahl[64];
 int bestAuswahl[64];
-char way[64];
-char bestWay[64];
-char bestWaySum = 64;
-char sumNow = 0;
+int way[64];
+int bestWay[64];
+int bestWaySum = 100;
+int sumNow = 0;
 
-char sevenCounter = 0;
+long long sevenCounter = 0;
+long aCnt = 0;
 
 unsigned long long cnt = 0;
 int lehrerCnt[28];
@@ -92,12 +91,21 @@ int main()
     {
         lehrerCnt[i] = 0;
     }
+    for (int i = 0; i < 64; i++)
+    {
+        way[i] = 0;
+        bestWay[i] = 0;
+    }
+
     cout << "Start" << endl;
+    bestWaySum = 100;
     nextSchueler(0);
     for (int i = 0; i < 64; i++)
     {
         cout << i + 1 << ": " << bestWay[i] << endl;
     }
+    cout << cnt << " Berechnungen!" << endl;
+    cout << aCnt << " kleinere Berechnungen!" << endl;
 
 }
 
@@ -105,8 +113,11 @@ void nextSchueler(int counter)
 {
     if (counter >= schuelerZahl-1)
     {
+        cnt++;
+        cout << sumNow << " : " << bestWaySum << endl;
         if (sumNow < bestWaySum)
         {
+            bestWaySum = sumNow;
             for (int i = 0; i < 64; i++)
             {
                 way[i]=bestWay[i];
@@ -115,7 +126,6 @@ void nextSchueler(int counter)
     }
     else
     {
-        auto start = high_resolution_clock::now();
         int teach = schueler[counter][0];
         if (lehrerCnt[teach] < 4)
         {
@@ -141,13 +151,6 @@ void nextSchueler(int counter)
                 lehrerCnt[teach]--;
                 sumNow--;
             }
-        }
-        if (counter == 7)
-        {
-            auto stop = high_resolution_clock::now();
-            auto duration = duration_cast<microseconds>(stop - start);
-            sevenCounter++;
-            cout << sevenCounter << "/128 (" << duration.count()/1000000 <<"s)" << endl;
         }
     }
 }
