@@ -1,6 +1,3 @@
-// AbiLehrerZuteilung.cpp : Diese Datei enthält die Funktion "main". Hier beginnt und endet die Ausführung des Programms.
-//
-
 #include <iostream>
 using namespace std;
 void nextSchueler(int counter);
@@ -72,13 +69,13 @@ int schueler[64][2] =
     { 19,1 },
     { 19,8 },
     { 19,26 } };
-int aktAuswahl[64];
 
 int way[64];
 int bestWay[64];
 
 int bestWaySum = 100;
 int sumNow = 0;
+
 
 long long sevenCounter = 0;
 long aCnt = 0;
@@ -98,7 +95,6 @@ int main()
         bestWay[i] = 0;
     }
 
-    cout << "Start" << endl;
     bestWaySum = 100;
     nextSchueler(0);
     for (int i = 0; i < 64; i++)
@@ -115,15 +111,16 @@ void nextSchueler(int counter)
     if (counter >= schuelerZahl)
     {
         cnt++;
-        if (sumNow < bestWaySum)
-        {
-            aCnt++;
-            bestWaySum = sumNow;
-            for (int i = 0; i < 64; i++)
+        if (sumNow <= bestWaySum)
             {
-                bestWay[i]= way[i];
+                aCnt++;
+                bestWaySum = sumNow;
+                for (int i = 0; i < 64; i++)
+                {
+                    bestWay[i] = way[i];
+                }
             }
-        }
+
     }
     else
     {
@@ -134,7 +131,6 @@ void nextSchueler(int counter)
             {
                 lehrerCnt[teach]++;
                 way[counter] = 0;
-                aktAuswahl[counter] = teach;
                 nextSchueler(counter + 1);
                 lehrerCnt[teach]--;
             }
@@ -147,7 +143,6 @@ void nextSchueler(int counter)
                 sumNow++;
                 lehrerCnt[teach]++;
                 way[counter] = 1;
-                aktAuswahl[counter] = teach;
                 nextSchueler(counter + 1);
                 lehrerCnt[teach]--;
                 sumNow--;
@@ -156,13 +151,3 @@ void nextSchueler(int counter)
     }
 }
 
-// Programm ausführen: STRG+F5 oder Menüeintrag "Debuggen" > "Starten ohne Debuggen starten"
-// Programm debuggen: F5 oder "Debuggen" > Menü "Debuggen starten"
-
-// Tipps für den Einstieg: 
-//   1. Verwenden Sie das Projektmappen-Explorer-Fenster zum Hinzufügen/Verwalten von Dateien.
-//   2. Verwenden Sie das Team Explorer-Fenster zum Herstellen einer Verbindung mit der Quellcodeverwaltung.
-//   3. Verwenden Sie das Ausgabefenster, um die Buildausgabe und andere Nachrichten anzuzeigen.
-//   4. Verwenden Sie das Fenster "Fehlerliste", um Fehler anzuzeigen.
-//   5. Wechseln Sie zu "Projekt" > "Neues Element hinzufügen", um neue Codedateien zu erstellen, bzw. zu "Projekt" > "Vorhandenes Element hinzufügen", um dem Projekt vorhandene Codedateien hinzuzufügen.
-//   6. Um dieses Projekt später erneut zu öffnen, wechseln Sie zu "Datei" > "Öffnen" > "Projekt", und wählen Sie die SLN-Datei aus.
