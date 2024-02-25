@@ -73,9 +73,10 @@ int schueler[64][2] =
     { 19,8 },
     { 19,26 } };
 int aktAuswahl[64];
-int bestAuswahl[64];
+
 int way[64];
 int bestWay[64];
+
 int bestWaySum = 100;
 int sumNow = 0;
 
@@ -102,7 +103,7 @@ int main()
     nextSchueler(0);
     for (int i = 0; i < 64; i++)
     {
-        cout << i + 1 << ": " << bestWay[i] << endl;
+        if(bestWay[i] + 1==2)cout << i + 1 << ": " << bestWay[i]+1 << endl;
     }
     cout << cnt << " Berechnungen!" << endl;
     cout << aCnt << " kleinere Berechnungen!" << endl;
@@ -111,16 +112,16 @@ int main()
 
 void nextSchueler(int counter)
 {
-    if (counter >= schuelerZahl-1)
+    if (counter >= schuelerZahl)
     {
         cnt++;
-        cout << sumNow << " : " << bestWaySum << endl;
         if (sumNow < bestWaySum)
         {
+            aCnt++;
             bestWaySum = sumNow;
             for (int i = 0; i < 64; i++)
             {
-                way[i]=bestWay[i];
+                bestWay[i]= way[i];
             }
         }
     }
