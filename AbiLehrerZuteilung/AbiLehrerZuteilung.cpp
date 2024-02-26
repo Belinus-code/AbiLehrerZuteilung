@@ -3,8 +3,8 @@ using namespace std;
 void nextSchueler(int counter);
 
 
-int schuelerZahl = 64;
-int schueler[64][2] =
+int schuelerZahl = 65;
+int schueler[65][2] =
 { 
     {1,20},
     {2,4},
@@ -25,6 +25,7 @@ int schueler[64][2] =
     {9,7},
     {5,7},
     {10,28},
+    {7,2},
     {7,2},
     {7,10},
     {10,28},
@@ -72,8 +73,8 @@ int schueler[64][2] =
     {19,26}
 };
 
-int way[64];
-int bestWay[64];
+int way[65];
+int bestWay[65];
 
 int bestWaySum = 100;
 int sumNow = 0;
@@ -91,7 +92,7 @@ int main()
     {
         lehrerCnt[i] = 0;
     }
-    for (int i = 0; i < 64; i++)
+    for (int i = 0; i < 65; i++)
     {
         way[i] = 0;
         bestWay[i] = 0;
@@ -99,7 +100,7 @@ int main()
 
     bestWaySum = 100;
     nextSchueler(0);
-    for (int i = 0; i < 64; i++)
+    for (int i = 0; i < 65; i++)
     {
         if(bestWay[i] + 1==2)cout << i + 1 << ": " << bestWay[i]+1 << endl;
     }
@@ -113,15 +114,18 @@ void nextSchueler(int counter)
     if (counter >= schuelerZahl)
     {
         cnt++;
+        
         if (sumNow <= bestWaySum)
         {
+
             aCnt++;
             bestWaySum = sumNow;
-            for (int i = 0; i < 64; i++)
+            for (int i = 0; i < 65; i++)
             {
                 bestWay[i] = way[i];
             }
         }
+        
 
     }
     else
