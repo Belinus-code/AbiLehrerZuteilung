@@ -19,8 +19,6 @@ int sumNow = 0;
 
 
 long long sevenCounter = 0;
-int debugCount1 = 0;
-int debugCount2 = 0;
 long aCnt = 0;
 
 unsigned long long cnt = 0;
@@ -46,15 +44,10 @@ int main()
     }
     cout << cnt << " Berechnungen!" << endl;
     cout << aCnt << " kleinere Berechnungen!" << endl;
-
-    cout << debugCount1 << " Count 1" << endl;
-    cout << debugCount2 << " Count 2" << endl;
-
 }
 
 void nextSchueler(int counter)
 {
-    if (counter > 7)return;
     if (counter >= schuelerZahl)
     {
         cnt++;
@@ -110,15 +103,7 @@ void nextSchueler(int counter)
 
 void printProgress(int counter)
 {
-    if (counter != 7)
-    {
-        sevenCounter += pow(2, (6 - counter));
-        debugCount2++;
-    }
-    else
-    {
-        sevenCounter++;
-        debugCount1++;
-    }
+    if (counter != 7)sevenCounter += pow(2, (6 - counter));
+    else sevenCounter++;
     cout << sevenCounter << " / 128" << endl;
 }
